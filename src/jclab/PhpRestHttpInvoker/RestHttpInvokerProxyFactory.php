@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * User: jichan (development@jc-lab.net)
  * Date: 2019-02-28
@@ -13,6 +13,8 @@ class RestHttpInvokerProxyFactory {
     private $serviceInterfaceRef;
     private $defaultHeaders = null;
 
+    private $methodsParameterTypes = array();
+
     public function setServiceUrl($url) {
         $this->serviceUrl = $url;
     }
@@ -22,8 +24,12 @@ class RestHttpInvokerProxyFactory {
         $this->serviceInterfaceRef = new \ReflectionClass($interface);
     }
 
-    public function addMethod($name, $argTypes) {
-
+    public function setMethodParemeterTypes($name, $argTypes) {
+        foreach ($argTypes as &$value) {
+            if($value == 'string')
+                $value = 'java.lang.String';
+        }
+        $this->methodsParameterTypes[$name] = $argTypes;
     }
 
     public function getProxyObject() {
@@ -54,24 +60,34 @@ class RestHttpInvokerProxyFactory {
         );
 
         if($args) {
-            for ($i = 0, $count = count($args); $i < $count; $i++) {
-                $type = \gettype($args[$i]);
-                switch($type) {
-                    case 'integer':
-                        $type = 'int';
-                        break;
-                    case 'string':
-                        $type = 'java.lang.String';
-                        break;
-                    case 'array':
-                        if(self::isAssoc($args[$i])) {
-                            $type = 'java.util.Map';
-                        }else{
-                            $type = 'java.util.List';
-                        }
-                        break;
+            if(isset($this->methodsParameterTypes[$methodName])) {
+                $remoteInvocation['parameterTypes'] = $this->methodsParameterTypes[$methodName];
+            }else{
+                $remoteInvocation['parameterTypes'] = [];
+                for ($i = 0, $count = count($args); $i < $count; $i++) {
+                    $remoteInvocation['parameterTypes'][] = null;
                 }
-                $remoteInvocation['parameterTypes'][] = $type;
+            }
+            for ($i = 0, $count = count($args); $i < $count; $i++) {
+                if(!$remoteInvocation['parameterTypes'][$i]) {
+                    $type = \gettype($args[$i]);
+                    switch ($type) {
+                        case 'integer':
+                            $type = 'int';
+                            break;
+                        case 'string':
+                            $type = 'java.lang.String';
+                            break;
+                        case 'array':
+                            if (self::isAssoc($args[$i])) {
+                                $type = 'java.util.Map';
+                            } else {
+                                $type = 'java.util.List';
+                            }
+                            break;
+                    }
+                    $remoteInvocation['parameterTypes'][$i] = $type;
+                }
             }
         }
 
