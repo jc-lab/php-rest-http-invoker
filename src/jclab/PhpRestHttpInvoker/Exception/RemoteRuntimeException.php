@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * User: jichan (development@jc-lab.net)
  * Date: 2019-02-28
