@@ -1,0 +1,14 @@
+{
+    "name": "jc-lab/php-rest-http-invoker",
+    "type": "library",
+    "require": {
+        "tcdent/php-restclient": "^0.1.7"
+    },
+    "license": "Apache License 2.0",
+    "authors": [
+        {
+            "name": "jichan",
+            "email": "development@jc-lab.net"
+        }
+    ]
+}
