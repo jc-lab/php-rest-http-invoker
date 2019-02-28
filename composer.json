@@ -16,7 +16,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "jclab\\PhpRestHttpInvoker\\", "src/jclab/PhpRestHttpInvoker"
+            "jclab\\PhpRestHttpInvoker\\": "src/jclab/PhpRestHttpInvoker"
         }
     }
 }
