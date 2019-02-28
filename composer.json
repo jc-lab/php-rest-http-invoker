@@ -4,6 +4,9 @@
     "require": {
         "tcdent/php-restclient": "^0.1.7"
     },
+    "require-dev": {
+    	"tcdent/php-restclient": "^0.1.7"
+    },
     "license": "Apache-2.0",
     "authors": [
         {
