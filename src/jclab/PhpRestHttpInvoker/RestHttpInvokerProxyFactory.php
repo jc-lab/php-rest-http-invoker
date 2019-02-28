@@ -1,11 +1,11 @@
-<?php
+﻿<?php
 /**
  * User: jichan (development@jc-lab.net)
  * Date: 2019-02-28
  * Time: 오전 11:52
  */
 
-namespace jclab;
+namespace jclab\PhpRestHttpInvoker;
 
 class RestHttpInvokerProxyFactory {
     private $serviceUrl;
@@ -79,7 +79,7 @@ class RestHttpInvokerProxyFactory {
         $response = $result->decode_response();
         if($result->info->http_code == 200) {
             if($response->exception) {
-                throw new RemoteRuntimeException($response->exception);
+                throw new Exception\RemoteRuntimeException($response->exception);
             }else{
                 return $response->value;
             }

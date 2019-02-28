@@ -1,11 +1,11 @@
-<?php
+﻿<?php
 /**
  * User: jichan (development@jc-lab.net)
  * Date: 2019-02-28
  * Time: 오후 2:07
  */
 
-namespace jclab;
+namespace jclab\PhpRestHttpInvoker\Exception;
 
 class RemoteRuntimeException extends \Exception
 {

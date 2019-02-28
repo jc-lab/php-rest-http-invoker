@@ -13,5 +13,10 @@
             "name": "jichan",
             "email": "development@jc-lab.net"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "jclab\\PhpRestHttpInvoker\\", "src/jclab/PhpRestHttpInvoker"
+        }
+    }
 }

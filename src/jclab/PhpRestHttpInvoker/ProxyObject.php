@@ -1,11 +1,11 @@
-<?php
+﻿<?php
 /**
  * User: jichan (development@jc-lab.net)
  * Date: 2019-02-28
  * Time: 오전 11:52
  */
 
-namespace jclab;
+namespace jclab\PhpRestHttpInvoker;
 
 class ProxyObject
 {
