@@ -95,7 +95,7 @@ class RestHttpInvokerProxyFactory {
         $response = $result->decode_response();
         if($result->info->http_code == 200) {
             if($response->exception) {
-                throw new Exception\RemoteRuntimeException($response->exception);
+                throw new Exception\RemoteRuntimeException($response->exception[0], $response->exception[1]);
             }else{
                 return $response->value;
             }
